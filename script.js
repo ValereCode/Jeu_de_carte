@@ -2,7 +2,7 @@ const cardObjectDefinitions = [
     {id:1, path:"/images/10coeur.jpg"},
     {id:2, path:"/images/as_pique.jpg"},
     {id:3, path:"/images/as_coeur.jpg"},
-    {id:4, path:"/images/JackClubs.png"}
+    {id:4, path:"/images/card-JackClubs.png"}
 ];
 
 const backPath = '/images/back.jpg';
@@ -26,6 +26,7 @@ const altFront = "Une carte!"
 const cardContainer = document.querySelector(".card-container");
        
 creerCartes();
+
 function creerCartes() {
     cardObjectDefinitions.forEach((carte) => {
         createCard(carte);
@@ -34,58 +35,62 @@ function creerCartes() {
 
 function createCard(carte) {
 
-    const cardElem = createElement("div");
-    const innerElem = createElement("div");
-    const frontElem = createElement("div");
-    const backElem = createElement("div");
+    // Création des différents éléments 
+    const eltCarte = createElement("div");
+    const eltInner = createElement("div");
+    const eltFace = createElement("div");
+    const eltDos = createElement("div");
 
     // Les faces des images
-    const frontImg = createElement("img");
-    const backImg = createElement("img");
+    const faceImg = createElement("img");
+    const dosImg = createElement("img");
     
     //----------------
 
-    // cardElem
-    addClass(cardElem, "card");
-    addId(cardElem, carte.id);
+    // Action sur les éléments
+    // eltCarte
+    addClass(eltCarte, "card");
+    addId(eltCarte, carte.id);
 
-    // innerElem
-    addClass(innerElem, "card-inner");
+    // eltInner
+    addClass(eltInner, "card-inner");
 
     //----------------
 
-    // frontElem
-    addClass(frontElem, "card-front");
+    // eltFace
+    addClass(eltFace, "card-front");
 
     // frontimages
-    addSrc(frontImg, carte.path);
-    addAlt(frontImg, altFront);
-    addClass(frontImg, "card-img");
+    addSrc(faceImg, carte.path);
+    addAlt(faceImg, altFront);
+    addClass(faceImg, "card-img");
 
     //----------------
 
-    // backElem
-    addClass(backElem, "card-back");
+    // eltDos
+    addClass(eltDos, "card-back");
 
-    // backimages
-    addSrc(backImg, backPath);
-    addAlt(backImg, altBack);
-    addClass(backImg, "card-img");
+    // backimage
+    addSrc(dosImg, backPath);
+    addAlt(dosImg, altBack);
+    addClass(dosImg, "card-img");
 
     //----------------
-
-    addChild(frontElem, frontImg);
-    addChild(innerElem, frontElem);
-    addChild(backElem, backImg);
-    addChild(innerElem, backElem);
-    addChild(cardElem, innerElem);
+    
+    addChild(eltFace, faceImg);
+    addChild(eltInner, eltFace);
+    addChild(eltDos, dosImg);
+    addChild(eltInner, eltDos);
+    addChild(eltCarte, eltInner);
     
     //----------------
-
+    console.log(eltCarte.className);
     // Ajout de classe dans un grille
     remplirGrille(carte);
 
 }   
+
+//--------------------------
 
 // Une fonction qui crée un élément
 function createElement(type) {
@@ -113,32 +118,37 @@ function addAlt(elem, alt) {
 }
 
 // Une fonction qui ajoute un enfant à un élément
-function addChild(elem, child) {
-    elem.appendChild(child);
+function addChild(parent, enfant) {
+   if (typeof enfant == Node) {
+    parent.appendChild(enfant)
+   }
 }
+
+//---------------------
 
 // Une fonction qui ajoute une carte dans une grille
 function remplirGrille(carte) {
     const classeCarte = mapperCarte(carte);
-    const cartePosElem = document.querySelector(classeCarte);
-
-    addChild(cartePosElem, carte);
+    const grille = document.querySelector(classeCarte);
+    
+    addChild(grille, carte);
+    console.log(carte.className);
 }
 
 // Une fonction qui spécifie la grille  d'une carte
 function mapperCarte(carte) {
     switch (carte.id) {
         case 1:
-            return '.card-pos-a';
+            return '.carte1';
         
         case 2:
-            return '.card-pos-b';
+            return '.carte2';
         
         case 3:
-            return '.card-pos-c';
+            return '.carte3';
         
         case 4: 
-            return '.card-pos-d';
+            return '.carte4';
 
         default:
             break;
