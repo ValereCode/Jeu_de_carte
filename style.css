@@ -7,7 +7,7 @@
 }
 
 body {
-    height: 100vh;  /* 100% de l'écran */
+    height: 100vh;  /* 100% de la hauteur de l'écran */
 }
 
 main {
@@ -53,7 +53,7 @@ main {
    background-color: darkcyan;
 }
 
-/*
+
 
 .card {
     position: absolute;
@@ -92,4 +92,3 @@ main {
     transform: rotateY(180deg);
 }
 
-*/
