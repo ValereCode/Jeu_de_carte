@@ -17,6 +17,7 @@ main {
     border: 1px solid black;
 }
 
+/*========================================================*/
 .card-container {
     position: relative;
     height: 100%;
@@ -53,8 +54,7 @@ main {
    background-color: darkcyan;
 }
 
-
-
+/*========================================================*/
 .card {
     position: absolute;
     height: var(--card-height);

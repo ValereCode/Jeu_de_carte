@@ -6,10 +6,10 @@ const cardObjectDefinitions = [
 ];
 
 const backPath = '/images/back.jpg';
-const altBack = "Le derrière de d'une carte!"
-const altFront = "Une carte!"
+const altBack = "Le derrière d'une carte!";
+const altFront = "Une carte!";
 
-{/*
+/*
     <div class="card">
         <div class="card-inner">
             <div class="card-front">
@@ -20,69 +20,64 @@ const altFront = "Une carte!"
             </div>
         </div>
     </div>
-*/}
+*/
     
-
-const cardContainer = document.querySelector(".card-container");
+const conteneur = document.querySelector(".card-container");
        
-creerCartes();
-
-function creerCartes() {
+function afficherCartes() {
     cardObjectDefinitions.forEach((carte) => {
-        createCard(carte);
+        creerCarte(carte);
     });
 }
 
-function createCard(carte) {
+function creerCarte(carte) {
 
     // Création des différents éléments 
-    const eltCarte = createElement("div");
-    const eltInner = createElement("div");
-    const eltFace = createElement("div");
-    const eltDos = createElement("div");
-
-    // Les faces des images
-    const faceImg = createElement("img");
-    const dosImg = createElement("img");
+    const faceImg = creerElement("img");
+    const dosImg = creerElement("img");
+    const eltCarte = creerElement("div");
+    const eltInner = creerElement("div");
+    const eltFace = creerElement("div");
+    const eltDos = creerElement("div");
     
-    //----------------
-
-    // Action sur les éléments
-    // eltCarte
-    addClass(eltCarte, "card");
-    addId(eltCarte, carte.id);
-
-    // eltInner
-    addClass(eltInner, "card-inner");
-
-    //----------------
-
-    // eltFace
-    addClass(eltFace, "card-front");
+    /* **************************************************** */
 
     // frontimages
     addSrc(faceImg, carte.path);
     addAlt(faceImg, altFront);
     addClass(faceImg, "card-img");
 
-    //----------------
-
-    // eltDos
-    addClass(eltDos, "card-back");
+    // eltFace
+    addClass(eltFace, "card-front");
+    addChild(eltFace, faceImg);
 
     // backimage
     addSrc(dosImg, backPath);
     addAlt(dosImg, altBack);
     addClass(dosImg, "card-img");
 
-    //----------------
-    
-    addChild(eltFace, faceImg);
-    addChild(eltInner, eltFace);
+    // eltDos
+    addClass(eltDos, "card-back");
     addChild(eltDos, dosImg);
+
+    // eltInner
+    addClass(eltInner, "card-inner");
+    addChild(eltInner, eltFace);
     addChild(eltInner, eltDos);
+
+    // eltCarte
+    addClass(eltCarte, "card");
+    addId(eltCarte, carte.id);
     addChild(eltCarte, eltInner);
     
+    /*
+    eltFace.appendChild(faceImg);
+    eltInner.appendChild(eltFace);
+    eltDos.appendChild(dosImg);
+    eltInner.appendChild(eltDos);
+    eltCarte.appendChild(eltInner);
+    */
+
     //----------------
     console.log(eltCarte.className);
     // Ajout de classe dans un grille
@@ -93,7 +88,7 @@ function createCard(carte) {
 //--------------------------
 
 // Une fonction qui crée un élément
-function createElement(type) {
+function creerElement(type) {
     return document.createElement(type);
 } 
 
@@ -108,8 +103,8 @@ function addId(elem, id) {
 }
 
 // Une fonction qui ajoute l' attributs src à une image
-function addSrc(elem, src) {
-    elem.src = src;
+function addSrc(elem, source) {
+    elem.src = source;
 }
 
 // Une fonction qui ajoute l' attributs alt à une image
@@ -120,7 +115,7 @@ function addAlt(elem, alt) {
 // Une fonction qui ajoute un enfant à un élément
 function addChild(parent, enfant) {
    if (typeof enfant == Node) {
-    parent.appendChild(enfant)
+    parent.appendChild(enfant);
    }
 }
 
@@ -154,3 +149,5 @@ function mapperCarte(carte) {
             break;
     }
 }
+
+afficherCartes();
